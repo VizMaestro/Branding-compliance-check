@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figma Plugin UI</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      height: 100%;
+      margin: 0;
+      justify-content: space-between;
+      overflow: hidden;
+      box-sizing: border-box;
+      background-color: rgba(42, 52, 57);
+    }
+
+    .left, .right {
+      padding: 20px;
+    }
+
+    .left {
+      width: 35%;
+      /* border-right: 1px solid #474747; */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .right {
+      font-family: 'Roboto', sans-serif;
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: left;
+      gap: 8px;
+      padding-left: 28px;
+      padding-right: 28px;
+      padding-top: 36px;
+      background-color: rgba(35, 45, 50);
+      box-shadow: 10px 0 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .checkbox-group {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      color: #e3e4e5;
+      gap: 8px;
+      font-weight: 300;
+      font-size: 14px;
+    }
+    .checkbox-group input[type="checkbox"] {
+      accent-color: #4D4DFF;
+    }
+    .checkbox-group input[type="checkbox"]:checked + label {
+      color: #FFFFFF;
+    }
+    .checkbox-group label {
+      cursor: pointer;
+    }
+
+    .button-fill, .button-outline {
+      font-family: 'Roboto', sans-serif;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: 300;
+    }
+
+    .button-fill {
+      font-family: 'Roboto', sans-serif;
+      background-color: #4D4DFF;
+      color: #FFFFFF;
+      border: none;
+    }
+
+    .button-outline {
+      background-color: transparent;
+      color: #FFFFFF;
+      border: 2px solid #4D4DFF;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+    }
+
+    .headline {
+      font-family: 'Roboto', sans-serif;
+      border: 2px solid #4D4DFF;
+      font-weight: 200;
+      padding: 16px;
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-size: 28px;
+    }
+
+    .subtext {
+      font-family: 'Roboto', sans-serif;
+      color: #e3e4e580;
+      font-weight: 300;
+      font-size: 14px;
+      padding: 4px;
+      line-height: 1.6;
+    }
+
+    .count {
+      font-family: 'Roboto', sans-serif;
+      font-size: 66px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .button-container {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .heading {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px;
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .issue-list {
+      font-family: 'Roboto', sans-serif;
+      padding: 4px;
+      color: #e3e4e5b3;
+      font-size: 14px;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .issue-item {
+      font-family: 'Roboto', sans-serif;
+      margin-bottom: 4px;
+      padding: 5px 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100;
+    }
+
+    .issue-type {
+      text-align: left;
+    }
+
+    .issue-num {
+      text-align: right;
+      min-width: 30px;
+    }
+
+    .info-box {
+      background-color: #4D4DFF; /* same as the border color you had */
+      border-radius: 8px;
+      padding: 16px;
+      display: inline-block; /* or block, depending on layout */
+    }
+
+    .headline-result {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 100;
+      color: #FFFFFF;
+      font-size: 44px;
+      margin-bottom: 4px; /* spacing between headline and subtext */
+    }
+
+    .subtext-result {
+      font-family: 'Roboto', sans-serif;
+      color: #e3e4e5;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+ 
+  </style>
+</head>
+<body>
+  <div class="left">
+    <div>
+      <h3 class="heading">Design elements</h3>
+      <div class="checkbox-group">
+        <div><input type="checkbox" id="colors" value="colors"><label for="colors"> Colors</label></div>
+        <div><input type="checkbox" id="fonts" value="fonts"><label for="fonts"> Fonts</label></div>
+        <div><input type="checkbox" id="frames" value="frames"><label for="frames"> Non-component frames</label></div>
+        <div><input type="checkbox" id="effects" value="effects"><label for="effects"> Effects</label></div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button id="highlight" class="button-fill">Highlight issues</button>
+      <button id="mark" class="button-outline">Mark issues</button>
+    </div>
+  </div>
+  <div class="right" id="status">
+    <div class="headline">Welcome to brand compliance check</div>
+    <div class="subtext">Do you have a Design library and not sure if all your design elements are aligned to elements in the library? dd the library to your file and run this diagnostic to find issues</div>
+  </div>
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const getSelectedChecks = () => Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+
+    document.getElementById('highlight').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'highlight', checks: getSelectedChecks() } }, '*');
+    };
+    document.getElementById('mark').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'mark', checks: getSelectedChecks() } }, '*');
+    };
+
+    onmessage = (event) => {
+      const { count, issueCounts } = event.data.pluginMessage;
+      const status = document.getElementById('status');
+
+      let issueListHTML = '';
+      if (issueCounts) {
+        issueListHTML = '<div class="issue-list">';
+        for (const [type, num] of Object.entries(issueCounts)) {
+          issueListHTML += `
+                            <div class="issue-item">
+                            <span class="issue-type">${type}:</span>
+                            <span class="issue-num">${num}</span>
+                            </div>
+                            `;
+        }
+        issueListHTML += '</div>';
+      }
+
+      status.innerHTML = `
+        <div class="info-box">
+          <div class="headline-result">${count}</div>
+          <div class="subtext-result">Discrepancies found</div>
+        </div>
+        ${issueListHTML}
+      `;
+    };
+  </script>
+</body>
+</html>
